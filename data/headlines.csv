@@ -1,0 +1,10 @@
+id,company,date,headline,source,url
+apple-q1-2024,Apple,2024-02-01,Apple reports first quarter results,Apple Newsroom,https://www.apple.com/newsroom/2024/02/apple-reports-first-quarter-results/
+apple-q2-2024,Apple,2024-05-02,Apple reports second quarter results,Apple Newsroom,https://www.apple.com/newsroom/2024/05/apple-reports-second-quarter-results/
+apple-q3-2024,Apple,2024-08-01,Apple reports third quarter results,Apple Newsroom,https://www.apple.com/newsroom/2024/08/apple-reports-third-quarter-results/
+microsoft-q2-2024,Microsoft,2024-01-30,Microsoft Cloud strength drives second quarter results,Microsoft Investor Relations,https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/press-release-webcast
+microsoft-q3-2024,Microsoft,2024-04-25,Microsoft Cloud strength drives third quarter results,Microsoft Investor Relations,https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/press-release-webcast
+microsoft-q4-2024,Microsoft,2024-07-30,Microsoft Cloud strength drives fourth quarter results,Microsoft Investor Relations,https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/press-release-webcast
+nvidia-q4-2024,NVIDIA,2024-02-21,NVIDIA announces financial results for fourth quarter and fiscal 2024,NVIDIA Newsroom,https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2024
+nvidia-q1-2025,NVIDIA,2024-05-22,NVIDIA announces financial results for first quarter fiscal 2025,NVIDIA Newsroom,https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2025
+nvidia-q2-2025,NVIDIA,2024-08-28,NVIDIA announces financial results for second quarter fiscal 2025,NVIDIA Newsroom,https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2025
