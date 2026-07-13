@@ -4,3 +4,4 @@ __pycache__/
 *.py[cod]
 outputs/*.json
 !outputs/.gitkeep
+MENTOR_GUIDE.md
