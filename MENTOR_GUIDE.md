@@ -10,7 +10,7 @@ The required deliverable is a Streamlit app that lets a user select a company an
 
 - Create a Doubleword API key with a modest hard budget.
 - Put the key in the student's local `.env`; do not send it in chat or commit it.
-- Replace the example rows in `data/headlines.csv` with a 50-100 row Finnhub company-news export covering three or four recognisable companies. Keep the existing column names.
+- Check that `data/headlines.csv` is present and contains the supplied Finnhub snapshot. Keep the existing column names if you refresh it.
 - Check that Python is available and that the student can install the packages in `requirements.txt`.
 - Give them the timetable and research questionnaire already in this folder's parent directory.
 
