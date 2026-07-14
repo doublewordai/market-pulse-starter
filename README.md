@@ -1,3 +1,22 @@
+# market-pulse-starter
+
+## Running the API
+The project includes a small FastAPI application exposing headline lookups.
+Install dependencies and run the server:
+
+```bash
+pip install -r requirements.txt
+# from project root
+python -m data.app
+# or
+uvicorn data.api:app --reload --host 127.0.0.1 --port 8000
+```
+
+Endpoints:
+
+- `GET /headlines/?company=<name>&date=<YYYY-MM-DD>` — returns matching headlines or 404
+- `POST /headlines/` — JSON body `{ "company": "...", "date": "YYYY-MM-DD" }`
+
 # Market Pulse
 
 Build a small AI finance news app over five days.
