@@ -1,0 +1,6 @@
+{
+  "response_format": {
+    "style": "Use this exact structure for each item:",
+    "template": "This is news of the (company name): \n (AI summary)\n URL to the news article:(URL link) \n Source:(Source) \n News ID:(ID)"
+  }
+}

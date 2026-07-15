@@ -1,0 +1,57 @@
+from pydantic import BaseModel, ConfigDict
+from typing import Literal, Optional
+
+
+class NewsItem(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    company_name: str
+    summary: str
+    url: Optional[str] = None
+    image_url: Optional[str] = None
+    source: Optional[str] = None
+    id: Optional[str] = None
+    expected_price_direction: Literal["increase", "decrease", "neutral", "uncertain"]
+    company_impact: Literal["positive", "negative", "mixed", "neutral", "uncertain"]
+    impact_reasoning: str
+
+
+class NewsSummaryResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    news: list[NewsItem]
+
+
+class NewsSearchFilters(BaseModel):
+    """Filters extracted from a free-text request for the headlines table."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    company: str | None
+    date: str | None
+    headline: str | None
+    id: str | None
+    source: str | None
+    url: str | None
+    headline_keyword: str | None
+    headline_keyword_exclude: str | None
+
+
+STRICT_NEWS_RESPONSE_FORMAT = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "news_summary_response",
+        "strict": True,
+        "schema": NewsSummaryResponse.model_json_schema(),
+    },
+}
+
+
+STRICT_SEARCH_FILTER_RESPONSE_FORMAT = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "news_search_filters",
+        "strict": True,
+        "schema": NewsSearchFilters.model_json_schema(),
+    },
+}

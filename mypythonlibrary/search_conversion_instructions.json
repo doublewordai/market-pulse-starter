@@ -1,0 +1,34 @@
+{
+  "task": "Convert one free-text news search request into filters for a headlines CSV table.",
+  "available_filters": {
+    "company": "Company or organisation name. Use null if none was requested.",
+    "date": "A specific date in YYYY-MM-DD form. Use null if no exact day was requested.",
+    "headline": "An exact phrase explicitly requested in the headline. Usually use headline_keyword instead.",
+    "headline_keyword": "A short word or phrase that must appear in the headline.",
+    "headline_keyword_exclude": "A short word or phrase that must not appear in the headline.",
+    "source": "Publisher or news source.",
+    "id": "Article ID.",
+    "url": "Article URL."
+  },
+  "conversion_rules": [
+    "Return every schema field; use null for fields that were not requested.",
+    "Convert spoken or written month names and ordinal dates to YYYY-MM-DD when a year is supplied.",
+    "Treat phrases such as 'with OpenAI mentioned' as headline_keyword: 'OpenAI', not as an exact headline.",
+    "Ignore conversational filler such as 'can you give me information on'.",
+    "Do not invent company names, dates, sources, or keywords.",
+    "For a date range or a month-only request, use null for date because this CSV filter only accepts one date string."
+  ],
+  "example": {
+    "query": "Can you give me information on Apple, of July twelfth 2026, with OpenAI mentioned",
+    "filters": {
+      "company": "Apple",
+      "date": "2026-07-12",
+      "headline": null,
+      "id": null,
+      "source": null,
+      "url": null,
+      "headline_keyword": "OpenAI",
+      "headline_keyword_exclude": null
+    }
+  }
+}
