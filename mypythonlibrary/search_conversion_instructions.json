@@ -1,34 +1,84 @@
 {
-  "task": "Convert one free-text news search request into filters for a headlines CSV table.",
+  "task": "Convert one free-text news search request into filters for a headlines database (CSV or Finnhub API).",
   "available_filters": {
     "company": "Company or organisation name. Use null if none was requested.",
-    "date": "A specific date in YYYY-MM-DD form. Use null if no exact day was requested.",
+    "date": "A specific date in YYYY-MM-DD form. Use null if no exact day was requested or if using date range.",
+    "from_date": "Start date in YYYY-MM-DD form for date range queries. Use null if no date range requested.",
+    "to_date": "End date in YYYY-MM-DD form for date range queries. Use null if no date range requested.",
     "headline": "An exact phrase explicitly requested in the headline. Usually use headline_keyword instead.",
     "headline_keyword": "A short word or phrase that must appear in the headline.",
     "headline_keyword_exclude": "A short word or phrase that must not appear in the headline.",
     "source": "Publisher or news source.",
     "id": "Article ID.",
-    "url": "Article URL."
+    "url": "Article URL.",
+    "category": "News category from Finnhub API (e.g., 'technology', 'business', 'top news', 'forex', 'crypto', 'merger'). Use null if not specified.",
+    "summary": "Keywords or phrases that should appear in the news summary field. Use null if not specified."
   },
   "conversion_rules": [
     "Return every schema field; use null for fields that were not requested.",
     "Convert spoken or written month names and ordinal dates to YYYY-MM-DD when a year is supplied.",
+    "When a month or date is mentioned but no year is specified, automatically use the current year. For example, if the current year is 2026, 'July' becomes '2026-07-01', 'July 12' becomes '2026-07-12'. Always use the actual current year when no year is specified.",
+    "For month-only requests (e.g., 'June', 'July 2026'), use from_date and to_date to represent the entire month. Set from_date to first day of month and to_date to last day of month. Set date to null.",
+    "For date range requests (e.g., 'from June 1 to June 15'), use from_date and to_date. Set date to null.",
+    "For single specific date requests, use date field. Set from_date and to_date to null.",
     "Treat phrases such as 'with OpenAI mentioned' as headline_keyword: 'OpenAI', not as an exact headline.",
     "Ignore conversational filler such as 'can you give me information on'.",
     "Do not invent company names, dates, sources, or keywords.",
-    "For a date range or a month-only request, use null for date because this CSV filter only accepts one date string."
+    "For company names, correct common spelling mistakes and typos. Available companies: Apple, Tesla, Microsoft, NVIDIA, Amazon, Alphabet. Match user input to the closest matching company name (e.g., 'Microsfot' -> Microsoft, 'aple' -> Apple, 'tesa' -> Tesla).",
+    "When user mentions categories like 'tech news', 'business news', 'crypto news', use the category filter with appropriate values: 'technology', 'business', 'crypto', etc.",
+    "When user asks for news about specific topics like 'mergers', 'forex', use the category filter with values: 'merger', 'forex'.",
+    "The summary field can be used when user asks for content-related filtering, such as 'news about earnings' or 'news about partnerships'.",
+    "IMPORTANT: When returning company names, always use the full company name (e.g., 'Apple', 'Microsoft', 'Tesla') instead of stock symbols (e.g., 'AAPL', 'MSFT', 'TSLA'). Convert any stock symbols to their corresponding company names: AAPL->Apple, MSFT->Microsoft, GOOGL->Alphabet, AMZN->Amazon, TSLA->Tesla, NVDA->NVIDIA, META->Meta, NFLX->Netflix, DIS->Disney, INTC->Intel, AMD->AMD, CSCO->Cisco, ADBE->Adobe, CRM->Salesforce, ORCL->Oracle, IBM->IBM, AVGO->Broadcom, JPM->JPMorgan, V->Visa, PG->Procter & Gamble, JNJ->Johnson & Johnson, BRK.B->Berkshire Hathaway."
   ],
   "example": {
     "query": "Can you give me information on Apple, of July twelfth 2026, with OpenAI mentioned",
     "filters": {
       "company": "Apple",
       "date": "2026-07-12",
+      "from_date": null,
+      "to_date": null,
       "headline": null,
       "id": null,
       "source": null,
       "url": null,
       "headline_keyword": "OpenAI",
-      "headline_keyword_exclude": null
+      "headline_keyword_exclude": null,
+      "category": null,
+      "summary": null
+    }
+  },
+  "month_example": {
+    "query": "Apple news for June 2026",
+    "filters": {
+      "company": "Apple",
+      "date": null,
+      "from_date": "2026-06-01",
+      "to_date": "2026-06-30",
+      "headline": null,
+      "id": null,
+      "source": null,
+      "url": null,
+      "headline_keyword": null,
+      "headline_keyword_exclude": null,
+      "category": null,
+      "summary": null
+    }
+  },
+  "finnhub_example": {
+    "query": "Technology news about Apple from June 2026",
+    "filters": {
+      "company": "Apple",
+      "date": null,
+      "from_date": "2026-06-01",
+      "to_date": "2026-06-30",
+      "headline": null,
+      "id": null,
+      "source": null,
+      "url": null,
+      "headline_keyword": null,
+      "headline_keyword_exclude": null,
+      "category": "technology",
+      "summary": null
     }
   }
 }

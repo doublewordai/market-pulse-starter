@@ -1,6 +1,6 @@
 {
   "response_format": {
     "style": "Use this exact structure for each item:",
-    "template": "This is news of the (company name): \n (AI summary)\n URL to the news article:(URL link) \n Source:(Source) \n News ID:(ID)"
+    "template": "This is news of the (company name): \n Date: (YYYY-MM-DD)\n (AI summary - 6 to 10 sentences)\n URL to the news article:(URL link) \n Source:(Source) \n News ID:(ID)"
   }
 }

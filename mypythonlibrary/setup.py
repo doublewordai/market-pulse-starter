@@ -1,5 +1,5 @@
 from setuptools import find_packages, setup
-
+import streamlit as st
 setup(
     name='mypythonlib',
     packages=find_packages(include=['mypythonlib']),

@@ -1,14 +1,13 @@
 from pydantic import BaseModel, ConfigDict
 from typing import Literal, Optional
 
-
 class NewsItem(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     company_name: str
+    date: str
     summary: str
     url: Optional[str] = None
-    image_url: Optional[str] = None
     source: Optional[str] = None
     id: Optional[str] = None
     expected_price_direction: Literal["increase", "decrease", "neutral", "uncertain"]
@@ -23,18 +22,20 @@ class NewsSummaryResponse(BaseModel):
 
 
 class NewsSearchFilters(BaseModel):
-    """Filters extracted from a free-text request for the headlines table."""
 
     model_config = ConfigDict(extra="forbid")
 
     company: str | None
     date: str | None
+    from_date: str | None
+    to_date: str | None
     headline: str | None
     id: str | None
     source: str | None
     url: str | None
     headline_keyword: str | None
     headline_keyword_exclude: str | None
+    category: str | None
 
 
 STRICT_NEWS_RESPONSE_FORMAT = {
@@ -45,6 +46,10 @@ STRICT_NEWS_RESPONSE_FORMAT = {
         "schema": NewsSummaryResponse.model_json_schema(),
     },
 }
+
+# The summary model is asked for ordinary JSON; Pydantic validates it strictly in Python.
+# This is more broadly supported than provider-side JSON Schema enforcement.
+SUMMARY_JSON_RESPONSE_FORMAT = {"type": "json_object"}
 
 
 STRICT_SEARCH_FILTER_RESPONSE_FORMAT = {
